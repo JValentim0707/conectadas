@@ -25,7 +25,7 @@
         </div>
         <div class="d-flex flex-column justify-center align-center" style="height: 100%;">
           <div class="d-flex flex-column justify-start">
-            <div class="title">Example Text for Design</div>
+            <div class="title">Example Text for Design For Site</div>
             <div class="description">ipsum dolor sit amet, consectetur adipiscing elit. Morbi pretium et ante vitae aliquet.</div>
           </div>
           <v-btn @click="$router.push('/locais')" class="mt-2" dark color="#9802B8" max-width="120" elevation="2">Discovery</v-btn>
