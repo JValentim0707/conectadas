@@ -5,33 +5,27 @@
     <v-bottom-navigation
       :value="value"
       color="primary"
+      class="menu-navbar"
       v-if="$route.name !== 'home'"
     >
-      <v-btn>
-        <span>Recents</span>
-
-        <v-icon>mdi-history</v-icon>
+      <div>
+        <v-btn 
+        v-for="(item, i) in menuNavItem" :key="i"
+        v-bind:class="{ 'active-item' : getMenuIsActive(item)}"
+        @click="$router.push(item.path)"
+        >
+        <span>{{item.title}}</span>
+        <!-- <v-icon>mdi-home</v-icon> -->
       </v-btn>
-
-      <v-btn>
-        <span>Favorites</span>
-
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn>
-        <span>Nearby</span>
-
-        <v-icon>mdi-map-marker</v-icon>
-      </v-btn>
+    </div>
     </v-bottom-navigation>
     <v-main>
       <router-view/>
     </v-main>
 
-    <v-footer padless>
+    <v-footer padless color="#313131">
       <v-col
-        class="text-center"
+        class="text-center text-footer"
         cols="12"
       >
         {{ new Date().getFullYear() }} — <strong>Created By Your Tcc Group</strong>
@@ -44,14 +38,34 @@
 
 <script>
 
+import menuItems from './config/menuItems';
+
 export default {
   name: 'App',
   components: {
   },
 
-  data: () => ({
-    //
-  }),
+  computed: {
+  },
+
+  data: () => {
+    return {
+      menuNavItem: menuItems,
+    }
+  },
+
+  mounted() {
+    console.log('dale', this.$route)
+  },
+
+  methods: {
+    getMenuIsActive(menuItem) {
+      console.log('test', this.$route)
+
+      return this.$route.path === menuItem.path
+    }
+  }
+
 };
 </script>
 
@@ -78,5 +92,22 @@ export default {
     }
   }
   // font-weight: bold;
+}
+
+.menu-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: end !important;
+  span {
+    font-size: 14px;
+  }
+}
+
+.active-item {
+  border-bottom: solid whitesmoke 2px;
+}
+
+.text-footer {
+  color: white;
 }
 </style>

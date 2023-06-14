@@ -1,11 +1,17 @@
 <template>
     <div class="card-background">
-      <v-img
-        class="image-background"
-        :lazy-src="imageSource"
-        :src="require(`../../assets/${image}`)"
-        height="100%"
-      ></v-img>
+      <!-- <transition name="fade" mode="out-in"> -->
+        <v-img
+          class="image-background"
+          :lazy-src="imageSource"
+          :src="require(`../../assets/${image}`)"
+          height="100%"
+        ></v-img>
+        <div class="card-content">
+        <div class="title-card">{{ title }}</div> 
+        <div class="description-card">ipsum dolor sit amet, consectetur iscing elit.</div> 
+        </div>
+      <!-- </transition> -->
     </div>
 </template>
 
@@ -15,7 +21,8 @@ export default {
   name: 'CardPlaces',
   props: {
     // msg: String
-    image: String
+    image: String,
+    title: String
   },
   computed: {
     // imageSource () {
@@ -41,19 +48,44 @@ export default {
   height: 400px;
   border-radius: 5px;
   display: flex;
-  // flex-direction: column;
-  // align-items: flex-start;
-  // justify-content: flex-end;
-  // text-align: left;
-  // padding: 10px;
-  // width : 350px;
-  // height : 500px;
-  // background-color: rgba(255,255,255,0.7);
-  // background-repeat: no-repeat;
-  // background-blend-mode: overlay;
-  // background-size: cover;
+  align-items: end;
+  // transform: translateX(350px);
+  // transition: transform 0.8s;
   .v-image {
     border-radius: 10px;
   }
+  .card-content {
+    position: absolute;
+    z-index: 2;
+    background-color: #f5f5f5d8;
+    width: 99%;
+    height: 30px;
+    border-radius: 0px 0px 10px 10px;
+
+    .title-card {
+      font-size: 17px;
+      font-weight: bold;
+      margin-left: 8px;
+    }
+    .description-card {
+      font-size: 15px;
+      font-weight: bold;
+      margin-left: 8px;
+      display: none;
+    }
+  }
+
+  &:hover {
+    .card-content {
+      transition: 0.8s;
+      height: 100px;
+      // background-color: red;
+      .description-card {
+        display: flex;
+
+      }
+    }
+  }
 }
+
 </style>
