@@ -23,7 +23,7 @@
       <router-view/>
     </v-main>
 
-    <v-footer padless color="#313131">
+    <v-footer padless color="#191919">
       <v-col
         class="text-center text-footer"
         cols="12"
@@ -83,9 +83,9 @@ export default {
     margin-top: 10px;
   }
   .v-bottom-navigation {
-    background-color: #313131;
+    background-color: #191919;
     .v-btn {
-      background-color: #313131;
+      background-color: #191919;
       span {
         color: whitesmoke;
       }

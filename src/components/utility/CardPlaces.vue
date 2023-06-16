@@ -49,7 +49,7 @@ export default {
   border-radius: 5px;
   display: flex;
   align-items: end;
-  // transform: translateX(350px);
+  // transform: translateX(650px);
   // transition: transform 0.8s;
   .v-image {
     border-radius: 10px;

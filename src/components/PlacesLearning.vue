@@ -2,30 +2,74 @@
   <div class="container-wrapper">
     <div class="background">
       <div class="d-flex flex-column">
+        <div class="header-location">
+          <div class="title-page">Locais de Capacitação</div>
+          <div class="total-text">Locais Achados: {{ totalPlaces }}</div>
+        </div>
         <div class="search-container">
           <v-text-field
+            class="search-input"
             v-model="searchTerm"
             label="Pesquisar"
             outlined
             dense
             append-icon="fa-search"
           ></v-text-field>
+          <v-select
+            class="city-select"
+            :items="cities"
+            label="Cidades"
+            dense
+            outlined
+          ></v-select>
         </div> 
         <div class="places-content">
-          <div v-for="(card , i) in showFiveItems" 
-            :key="i" :title="card" 
-            v-bind:class="{ 'main-card' : getMainCard(i), 'test' : startScroll }">
-            <CardPlaces :image="card.fileName" :title="card.title"/>
+          <div class="header-slidder">
+            <v-icon color="white" class="ml-4">fa-solid fa-globe</v-icon>
+            <div class="ml-2">Estabelecimentos</div>
           </div>
-          <div @click="rightMove" class="right-arrow">
-            <v-icon color="white" size="26">fa-arrow-right</v-icon>
-          </div>
-          <div @click="lefttMove" class="left-arrow">
-            <v-icon color="white">fa-arrow-left</v-icon>
+          <div class="d-flex justify-center align-center" v>
+            <div v-for="(card , i) in showFiveItems" 
+              :key="i" :title="card" 
+              v-bind:class="{ 'main-card' : getMainCard(i)}">
+              <CardPlaces :image="card.fileName" :title="card.title"/>
+            </div>
+            <div @click="rightMove" class="right-arrow">
+              <v-icon color="white" size="26">fa-arrow-right</v-icon>
+            </div>
+            <div @click="lefttMove" class="left-arrow">
+              <v-icon color="white">fa-arrow-left</v-icon>
+            </div>
           </div>
         </div>
         <div class="map-location">
-          <div class="location-icon">
+          <div class="image-location-container">
+            <v-img
+            :lazy-src="require(`../assets/${selectedCard.fileName}`)"
+            :src="require(`../assets/${selectedCard.fileName}`)"
+            min-width="100%"
+            height="700px"
+            ></v-img>
+          </div>
+          <div class="maps-location-info">
+            <div class="header-info">{{selectedCard.title}}</div>
+            <div class="d-flex align-center pa-6">
+              <div class="location-icon">
+                <v-icon color="#191919" size="36">fa-solid fa-map-location-dot</v-icon>
+              </div>
+              <div class="location-info">{{ selectedCard.address }}</div>
+            </div>
+            <div class="divider-item"></div>
+            <div class="d-flex align-center pa-6">
+              <div class="location-icon">
+                <v-icon color="#191919" size="36">fa-sharp fa-solid fa-phone</v-icon>
+              </div>
+              <div class="location-info">{{ selectedCard.phone   }}</div>
+            </div>
+            <div class="divider-item"></div>
+          </div>
+          <!-- <div></div> -->
+          <!-- <div class="location-icon">
             <v-icon color="#39b907">fa-map</v-icon>
           </div>
           <div class="location-info">
@@ -38,7 +82,7 @@
               <v-icon class="mr-2 ml-2" color="whitesmoke">fa-location-dot</v-icon>
               Ir para o Mapa  
             </v-btn>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -62,13 +106,32 @@ export default {
     selectedCard() {
       const selectedPlace = this.showFiveItems[this.mainCard]
       return selectedPlace
+    },
+    totalPlaces() {
+      return places.filter(x => x.title.toLowerCase().includes(this.searchTerm.toLowerCase())).length
+      // return places.filter(x => x.title.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase())).length
+    }
+  },
+  watch: {
+    searchTerm() {
+      const filterArray = places.filter(x => x.title.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()))
+      this.showFiveItems = filterArray.slice(0, 5)
+
+      if (this.showFiveItems.length % 2 > 0) this.mainCard = Math.floor(this.showFiveItems.length / 2)
+      else if (this.showFiveItems.length % 2 === 0) this.mainCard = this.showFiveItems.length / 2
+
+      else this.mainCard = this.showFiveItems.length - 1
+      // this.mainCard = this.showFiveItems.length % 2 ? 
+      // this.$forceUpdate()
     }
   },
   data: () => {
     return {
-      searchTerm: null,
+      searchTerm: '',
+      citySelected: null,
+      cities: [],
       showFiveItems: [],
-      allPlaces: [],
+      allPlaces: places,
       startIndex: 0,
       mainCard: 2,
       startScroll: false,
@@ -134,13 +197,34 @@ export default {
   margin-top: 20px;
   display: flex;
   justify-content: center;
-  .v-input ::v-deep {
-    max-width: 40% !important;
-    min-width: 350px;
-    i {
-      font-size: 18px !important;
+
+  .city-select ::v-deep{
+    max-width: 250px !important;
+    min-width: 230px;
+    .v-input {
+      i {
+        font-size: 18px !important;
+      }
     }
   }
+
+  .search-input ::v-deep{
+    max-width: 40% !important;
+    min-width: 300px;
+    margin-right: 12px;
+    .v-input ::v-deep {
+      i {
+        font-size: 12px !important;
+      }
+    }
+  }
+}
+
+.divider-item {
+  display: flex;
+  width: 100%;
+  background-color: black;
+  height: 2px;
 }
 
 .main-card {
@@ -153,33 +237,58 @@ export default {
   }
 
 .places-content {
-  // width: 100%;
-  // position: relative;
-  // display: grid;
-  // grid-template-columns: repeat(5, auto);
-  background-color: #313131;
+  background-color: #191919;
   padding: 15px;
 
-  // margin: 20px 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  // flex-direction: column;
   align-items: center;
   .card-background {
     position: relative;
       padding: 0 2px;
+  }
 
-      // outline: solid 2px whitesmoke;
-      // transition: 2ms all;
-      // transform: translateX(200px);
-    // margin-left: 30px;
+  .header-slidder {
+    display: flex;
+    width: 100%;
+    color: white;
+    div {
+      font-size: 26px;
+    }
   }
 }
 
 .map-location {
-  height: 100px;
   display: flex;
   align-items: center;
+  justify-content: center;
+
+  .image-location-container ::v-deep {
+    min-width: 100%;
+    max-height: 100%;
+    .v-image__image {
+      filter: blur(3px);
+    }
+  }
+
+  .maps-location-info {
+    position: absolute;
+    width: 50%;
+    min-width: 750px;
+    max-width: 900%;
+    height: 500px;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    .header-info {
+      background-color: #191919;
+      border-radius: 10px 10px 0px 0px;
+      color: whitesmoke;
+      // text-transform: uppercase;
+      font-size: 26px;
+      padding: 6px 12px;
+    }
+  }
 
   .location-title {
     font-size: 16px;
@@ -187,7 +296,7 @@ export default {
   }
   .location-icon {
     margin-left: 10px;
-    border: solid 2px #39b907;
+    border: solid 2px #191919;
     border-radius: 100%;
     height: 70px;
     width: 70px;
@@ -197,15 +306,35 @@ export default {
   }
 
   .location-info {
-    margin-left: 10px;
-    display: flex;
-    flex-direction: column;
+    margin-left: 14px;
+    // display: flex;
+    max-width: 300px;
+    // flex-direction: column;
+    font-size: 18px;
+    font-weight: bold;
   }
 }
 
 .button-maps {
   right: 23px;
   position: absolute;
+}
+
+.header-location { 
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  .title-page {
+    font-weight: bold;
+    font-size: 20px;
+    padding: 12px;
+  }
+  .total-text {
+    font-weight: bold;
+    font-size: 16px;
+    padding: 12px;
+  }
 }
 
 .right-arrow {
