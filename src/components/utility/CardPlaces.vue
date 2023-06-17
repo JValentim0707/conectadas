@@ -3,7 +3,7 @@
       <!-- <transition name="fade" mode="out-in"> -->
         <v-img
           class="image-background"
-          :lazy-src="imageSource"
+          :lazy-src="require(`../../assets/${image}`)"
           :src="require(`../../assets/${image}`)"
           height="100%"
         ></v-img>
@@ -57,9 +57,10 @@ export default {
   .card-content {
     position: absolute;
     z-index: 2;
-    background-color: #f5f5f5d8;
+    background-color: #f5f5f5;
     width: 99%;
     height: 30px;
+    text-transform: uppercase;
     border-radius: 0px 0px 10px 10px;
 
     .title-card {

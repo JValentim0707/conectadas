@@ -17,7 +17,8 @@
           ></v-text-field>
           <v-select
             class="city-select"
-            :items="cities"
+            v-model="selectedCity"
+            :items="avaiblesCities"
             label="Cidades"
             dense
             outlined
@@ -28,7 +29,7 @@
             <v-icon color="white" class="ml-4">fa-solid fa-globe</v-icon>
             <div class="ml-2">Estabelecimentos</div>
           </div>
-          <div class="d-flex justify-center align-center" v>
+          <div class="d-flex justify-center align-center" v-if="filteredArray.length > 0">
             <div v-for="(card , i) in showFiveItems" 
               :key="i" :title="card" 
               v-bind:class="{ 'main-card' : getMainCard(i)}">
@@ -41,48 +42,78 @@
               <v-icon color="white">fa-arrow-left</v-icon>
             </div>
           </div>
+          <div v-else class="not-found"> 
+            <div class="d-flex flex-column">
+              <v-icon color="white" size="50">fa-face-frown</v-icon>
+              <div>Desculpe não encontramos</div>
+              <div>Oque você Procura</div>
+            </div>
+          </div>
         </div>
-        <div class="map-location">
-          <div class="image-location-container">
+        <div class="place-infos">
+          <div class="image-location-container" v-if="selectedCard">
             <v-img
             :lazy-src="require(`../assets/${selectedCard.fileName}`)"
             :src="require(`../assets/${selectedCard.fileName}`)"
-            min-width="100%"
-            height="700px"
+            min-width="35%" 
+            max-width="500px"
+            height="300px"
             ></v-img>
-          </div>
-          <div class="maps-location-info">
-            <div class="header-info">{{selectedCard.title}}</div>
-            <div class="d-flex align-center pa-6">
-              <div class="location-icon">
-                <v-icon color="#191919" size="36">fa-solid fa-map-location-dot</v-icon>
+            <div class="overview-info">
+              <div class="overview-title">Visão Geral</div>
+              <div class="divider-item"></div>
+              <div class="overview-content">
+                <div class="d-flex">
+                  <div class="overview-label">Nome</div>
+                  <div class="overview-text">{{ selectedCard.title }}</div>
+                </div>
+                <div class="d-flex">
+                  <div class="overview-label">Cidade</div>
+                  <div class="overview-text">{{selectedCard.city}}</div>
+                </div>
+                <div class="d-flex">
+                  <div class="overview-label">Telefone</div>
+                  <div class="overview-text">{{selectedCard.phone}}</div>
+                </div>
+                <div class="d-flex">
+                  <div class="overview-label">Endereço</div>
+                  <div class="overview-text">{{selectedCard.address}}</div>
+                </div>
+                <div class="d-flex">
+                  <div class="overview-label">CEP</div>
+                  <div class="overview-text">{{selectedCard.postcode}}</div>
+                </div>
               </div>
-              <div class="location-info">{{ selectedCard.address }}</div>
+              <a class="d-flex justify-center mb-2" href=" https://www.vestibularfatec.com.br/home/ ">https://www.vestibularfatec.com.br/home/</a>
             </div>
-            <div class="divider-item"></div>
-            <div class="d-flex align-center pa-6">
-              <div class="location-icon">
-                <v-icon color="#191919" size="36">fa-sharp fa-solid fa-phone</v-icon>
-              </div>
-              <div class="location-info">{{ selectedCard.phone   }}</div>
+          </div>
+          <div class="local-content" v-if="selectedCard">
+            <div class="d-flex">
+
+              <div class="local-content-title">{{ selectedCard.fullTitle}}</div>
+              <div class="location-icon" @click="openMapsUrl(selectedCard.url)" ><v-icon color="#ff5a4e">fa-solid fa-location-dot</v-icon></div>
             </div>
-            <div class="divider-item"></div>
+
+            <v-expansion-panels v-for="(section, i) in selectedCard.sections" :key="i" class="section-infos">
+            <v-expansion-panel>
+              <v-expansion-panel-header>
+                <div class="section-header">{{ section.sectionTitle }}</div>
+              </v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <div>
+                  <div class="section-subtitle">{{ section.subtitle }}</div>
+                  <div>{{ section.text }}</div>
+                </div>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
           </div>
-          <!-- <div></div> -->
-          <!-- <div class="location-icon">
-            <v-icon color="#39b907">fa-map</v-icon>
+          <div class="not-found not-found-dark" v-if="!selectedCard">
+            <div class="d-flex flex-column">
+              <v-icon color="#191919" size="50">fa-map-pin</v-icon>
+              <div>Porfavor Selecione um Local</div>
+            </div>
           </div>
-          <div class="location-info">
-            <div class="location-title">{{ selectedCard.title }}</div>
-            <div>Endereço: {{ selectedCard.address }}</div>
-            <div>Telefone: {{ selectedCard.phone }}</div>
-          </div>
-          <div class="button-maps">
-            <v-btn @click="openMapsUrl(selectedCard.url)" class="mt-2" dark color="#39b907" max-width="180" elevation="2">
-              <v-icon class="mr-2 ml-2" color="whitesmoke">fa-location-dot</v-icon>
-              Ir para o Mapa  
-            </v-btn>
-          </div> -->
         </div>
       </div>
     </div>
@@ -105,29 +136,52 @@ export default {
   computed: {
     selectedCard() {
       const selectedPlace = this.showFiveItems[this.mainCard]
-      return selectedPlace
+      return selectedPlace || null
     },
     totalPlaces() {
       return places.filter(x => x.title.toLowerCase().includes(this.searchTerm.toLowerCase())).length
       // return places.filter(x => x.title.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase())).length
+    },
+    filteredArray() {
+      const filteredBySearch = places.filter(x => x.title.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()))
+      if (this.selectedCity !== '' && this.selectedCity) return filteredBySearch.filter(x => x.city === this.selectedCity)
+      return filteredBySearch
+
+    },
+    avaiblesCities() {
+      if (this.filteredArray) return places.map(x => x.city)
+      return this.filteredArray.map(x => x.city)
     }
   },
   watch: {
     searchTerm() {
-      const filterArray = places.filter(x => x.title.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()))
-      this.showFiveItems = filterArray.slice(0, 5)
+      // const filterArray = places.filter(x => x.title.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()))
+      this.startIndex = 0
+      if (this.filteredArray.length === 0) this.showFiveItems = []
+      this.showFiveItems = this.filteredArray.slice(0, 5)
 
       if (this.showFiveItems.length % 2 > 0) this.mainCard = Math.floor(this.showFiveItems.length / 2)
       else if (this.showFiveItems.length % 2 === 0) this.mainCard = this.showFiveItems.length / 2
 
       else this.mainCard = this.showFiveItems.length - 1
-      // this.mainCard = this.showFiveItems.length % 2 ? 
-      // this.$forceUpdate()
+    },
+    selectedCity() {
+      this.startIndex = 0
+      if (!this.selectedCity || this.selectedCity === '') return this.showFiveItems = this.filteredArray.slice(0, 5)
+
+      const filteredByCity = this.filteredArray.filter(x => x.city === this.selectedCity)
+      this.showFiveItems = filteredByCity.slice(0, 5)
+
+      if (this.showFiveItems.length % 2 > 0) this.mainCard = Math.floor(this.showFiveItems.length / 2)
+      else if (this.showFiveItems.length % 2 === 0) this.mainCard = this.showFiveItems.length / 2
+
+      else this.mainCard = this.showFiveItems.length - 1
     }
   },
   data: () => {
     return {
       searchTerm: '',
+      selectedCity: '',
       citySelected: null,
       cities: [],
       showFiveItems: [],
@@ -150,8 +204,8 @@ export default {
       return itemRender
     },
     rightMove() {
-      this.startScroll = true
-      if ((this.startIndex + 5) > places.length - 1) {
+      if (this.mainCard === this.filteredArray.length - 1) return
+      if ((this.startIndex +  this.filteredArray.length - 1) > this.filteredArray.length - 1) {
         if (this.mainCard === 4) return
         return this.mainCard = this.mainCard + 1
       }
@@ -159,7 +213,7 @@ export default {
       // setTimeout(() => {
         this.startIndex = this.startIndex + 1
 
-        const itemRender = places.slice(this.startIndex, this.startIndex + 5)
+        const itemRender = this.filteredArray.slice(this.startIndex, this.startIndex + 5)
 
         this.showFiveItems = itemRender
         this.startScroll = false
@@ -174,7 +228,7 @@ export default {
 
       this.startIndex = this.startIndex - 1
 
-      const itemRender = places.slice(this.startIndex, this.startIndex + 5)
+      const itemRender = this.filteredArray.slice(this.startIndex, this.startIndex + 5)
 
       this.showFiveItems = itemRender
     },
@@ -188,7 +242,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 .background {
-  background-color: #E6E6E6;
+  background-color: whitesmoke;
   height: 100%;
 }
 
@@ -223,7 +277,7 @@ export default {
 .divider-item {
   display: flex;
   width: 100%;
-  background-color: black;
+  background-color: #191919;
   height: 2px;
 }
 
@@ -259,18 +313,90 @@ export default {
   }
 }
 
-.map-location {
+.place-infos {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  // align-items: center;
+  // justify-content: center;
+  padding: 70px;
 
-  .image-location-container ::v-deep {
-    min-width: 100%;
-    max-height: 100%;
-    .v-image__image {
-      filter: blur(3px);
+  .overview-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 300px;
+    border: solid 2px #191919;
+    margin-top: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+
+    .overview-title {
+      padding: 8px;
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      color: #191919;
+      font-size: 19px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .overview-content{
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+      .overview-label {
+        font-weight: bold;
+        font-size: 16px;
+        margin-right: 8px;
+        margin-bottom: 8px;
+      }
+      .overview-text {
+        font-size: 16px;
+      }
     }
   }
+
+  .image-location-container ::v-deep {
+    min-width: 10%;
+    // max-height: 100%;
+    .v-image__image {
+      border-radius: 10px;
+      // filter: blur(3px);
+    }
+  }
+
+  .local-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 50px;
+    .local-content-title {
+      display: flex;
+      align-items: center;
+      font-size: 22px;
+      font-weight: bold;
+      padding: 12px;
+      background-color: #191919;
+      height: 50px;
+      color: whitesmoke;
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .section-infos {
+      margin-top: 12px;
+      margin-bottom: 12px;
+      .section-header {
+        font-size: 23px;
+      }
+
+      .section-subtitle {
+        font-weight: bold;
+        font-size: 18px;
+      }
+    }
+  }
+
 
   .maps-location-info {
     position: absolute;
@@ -297,12 +423,19 @@ export default {
   .location-icon {
     margin-left: 10px;
     border: solid 2px #191919;
-    border-radius: 100%;
-    height: 70px;
-    width: 70px;
+    height: 50px;
+    border-radius: 10px;
+    width: 50px;
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
+    &:hover {
+      background-color: rgb(221, 221, 221);
+    }
+    &:active {
+      background-color: rgb(171, 171, 171);
+    }
   }
 
   .location-info {
@@ -379,6 +512,23 @@ export default {
   }
   &:active {
     background-color: #818181;
+  }
+}
+.not-found {
+  display: flex;
+  height: 500px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  div {
+    color: white;
+    font-size: 29px;
+    text-align: center;
+  }
+}
+.not-found-dark {
+  div {
+    color: #191919 !important;
   }
 }
 </style>
