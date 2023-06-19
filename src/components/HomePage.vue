@@ -10,8 +10,8 @@
         <div class="header">
           <div>
             <v-img
-              lazy-src="../assets/logo.png"
-              src="../assets/logo.png"
+              lazy-src="../assets/logoOriginal.png"
+              src="../assets/logoOriginal.png"
               width="130"
             ></v-img>
           </div>
@@ -23,12 +23,12 @@
 
           </div>
         </div>
-        <div class="d-flex flex-column justify-center align-center" style="height: 100%;">
+        <div class="message-home" style="height: 100%;">
           <div class="d-flex flex-column justify-start">
-            <div class="title">Example Text for Design</div>
-            <div class="description">ipsum dolor sit amet, consectetur adipiscing elit. Morbi pretium et ante vitae aliquet.</div>
+            <div class="title">Mulheres Conectadas</div>
+            <div class="description">E se todas as mulheres pudessem prosperar no ambiente de trabalho com oportunidades equânimes?</div>
           </div>
-          <v-btn @click="$router.push('/locais')" class="mt-2" dark color="#9802B8" max-width="120" elevation="2">Discovery</v-btn>
+          <v-btn @click="$router.push('/locais')" class="mt-2" dark color="#9802B8" max-width="120" elevation="2">Descubra</v-btn>
         </div>
       </div>
     </div>
@@ -64,6 +64,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+@import '../scss/variables';
 .image-background {
   width: 100vw;
   height: 100vh;
@@ -72,7 +73,19 @@ export default {
 
 .header {
   width: 100%;
+  padding: 20px;
+  // margin-left: 20px;
   display: flex;
+
+  @media screen {
+      @media (max-width: $mobile-screen) {
+        justify-content: center !important;
+        margin-top: 12px;
+        .v-image {
+          width: 100px !important;
+        }
+      } 
+    }
   .menu {
     display: flex;
     align-items: center;
@@ -106,17 +119,48 @@ export default {
   }
 }
 
-.title {
-  font-family: 'Inconsolata', monospace !important;
-  font-family: 'Itim', cursive !important;
-  font-weight: bold;
-  font-size: 46px !important;
-}
-.description {
-  max-width: 500px;
-  font-size: 20px;
-  margin-left: 4px;
-  margin-top: 4px;
+.message-home {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
+  @media screen {
+      @media (max-width: $mobile-screen) {
+        // color: red;
+        font-size: 30px !important;
+      }
+      
+    }
+
+  .title {
+    font-family: 'Inconsolata', monospace !important;
+    font-family: 'Itim', cursive !important;
+    font-weight: bold;
+    font-size: 46px !important;
+    @media screen {
+      @media (max-width: $mobile-screen) {
+        // color: red;
+        text-align: center;
+        font-size: 30px !important;
+      }
+      
+    }
+  }
+
+  .description {
+    max-width: 500px;
+    font-size: 20px;
+    margin-left: 4px;
+    margin-top: 4px;
+    @media screen {
+      @media (max-width: $mobile-screen) {
+        // color: red;
+        text-align: center;
+        font-size: 14px !important;
+      }
+    }
+  }
 }
 
 .content-home {

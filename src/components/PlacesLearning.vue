@@ -29,7 +29,7 @@
             <v-icon color="white" class="ml-4">fa-solid fa-globe</v-icon>
             <div class="ml-2">Estabelecimentos</div>
           </div>
-          <div class="d-flex justify-center align-center" v-if="filteredArray.length > 0">
+          <div class="cards-list" v-if="filteredArray.length > 0">
             <div v-for="(card , i) in showFiveItems" 
               :key="i" :title="card" 
               v-bind:class="{ 'main-card' : getMainCard(i)}">
@@ -41,6 +41,13 @@
             <div @click="lefttMove" class="left-arrow">
               <v-icon color="white">fa-arrow-left</v-icon>
             </div>
+          </div>
+          <div v-if="filteredArray.length > 0" class="places-list">
+            <div class="list-header">
+              <v-icon color="white" class="ml-4" size="16">fa-solid fa-globe</v-icon>
+              <div class="ml-2">Estabelecimentos</div>
+            </div>
+            <ListPlaces v-for="(card , i) in allPlaces" :key="i" :title="card.title" :image="card.fileName" ></ListPlaces>
           </div>
           <div v-else class="not-found"> 
             <div class="d-flex flex-column">
@@ -122,16 +129,18 @@
 
 <script>
 import CardPlaces from './utility/CardPlaces.vue'
+import ListPlaces from './utility/ListPlaces.vue'
 import places from '../config/places'
 
 
 export default {
   name: 'PlacesLearning',
   props: {
-    // msg: String
+    // msg: String,
   },
   components: {
     CardPlaces,
+    ListPlaces
   },
   computed: {
     selectedCard() {
@@ -241,6 +250,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+@import '../scss/variables';
 .background {
   background-color: whitesmoke;
   height: 100%;
@@ -272,6 +282,20 @@ export default {
       }
     }
   }
+
+  @media screen {
+      @media (max-width: $mobile-screen) {
+        flex-direction: column;
+        .city-select {
+          min-width: 100% !important;
+          padding: 0px 18px;
+        }
+        .search-input {
+          min-width: 100% !important;
+          padding: 0px 18px;
+        }
+      } 
+    }
 }
 
 .divider-item {
@@ -311,6 +335,28 @@ export default {
       font-size: 26px;
     }
   }
+
+  .cards-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // flex-direction: column;
+  }
+
+  @media screen {
+      @media (max-width: $mobile-screen) {
+        overflow-x: auto;
+        max-height: 500px;
+        padding-left: 0px;
+        .cards-list {
+          display: none !important;
+        }
+
+        .header-slidder {
+          display: none;
+        }
+      } 
+    }
 }
 
 .place-infos {
@@ -457,6 +503,7 @@ export default {
   display: flex;
   width: 100%;
   justify-content: space-between;
+  align-items: baseline;
 
   .title-page {
     font-weight: bold;
@@ -530,5 +577,25 @@ export default {
   div {
     color: #191919 !important;
   }
+}
+
+.places-list {
+  display: none;
+  width: 100%;
+  height: 500px;
+  flex-direction: column;
+  &:first-child {
+    margin-top: 500px;
+  }
+  .list-header {
+    color: whitesmoke;
+    display: flex;
+    padding: 12px 0px;
+  }
+  @media screen {
+      @media (max-width: $mobile-screen) {
+        display: flex;
+      } 
+    }
 }
 </style>
