@@ -6,7 +6,7 @@
         :lazy-src="require(`../../assets/${image}`)"
         :src="require(`../../assets/${image}`)"
         width="60px"
-        height="100%"
+        min-height="100%"
       ></v-img>
       <div class="card-content">
         <div class="title-card">{{ title }}</div> 
@@ -44,7 +44,8 @@ methods: {
 <style scoped lang="scss">
 .card-item {
   background-color: whitesmoke;
-  margin-bottom: 26px;
+  // margin-bottom: 26px;
+  border: solid 1px black;
   display: flex;
 }
 
@@ -56,11 +57,12 @@ methods: {
   margin-left: 10px;
   .title-card {
     font-weight: bold;
-    color: black;
+    // color: black;
   }
 
   .description-card {
     font-size: 12px;
+    padding-right: 12px;
   }
 }
 

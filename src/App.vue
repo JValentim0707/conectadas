@@ -8,17 +8,45 @@
       class="menu-navbar"
       v-if="$route.name !== 'home'"
     >
-      <div>
-        <v-btn 
+    <div class="menu-items">
+      <v-btn 
         v-for="(item, i) in menuNavItem" :key="i"
         v-bind:class="{ 'active-item' : getMenuIsActive(item)}"
         @click="$router.push(item.path)"
-        >
+      >
         <span>{{item.title}}</span>
-        <!-- <v-icon>mdi-home</v-icon> -->
       </v-btn>
     </div>
+    <div class="pr-2" @click="drawer = !drawer"><v-icon color="white">fa-solid fa-bars</v-icon></div>
     </v-bottom-navigation>
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      temporary
+    >
+      <div class="d-flex justify-center pa-5">
+        <v-img
+        lazy-src="./assets/logoOriginal.png"
+        src="./assets/logoOriginal.png"
+        max-width="100"
+        ></v-img>
+      </div>
+      <v-divider></v-divider>
+      <div v-for="(item, i) in menuNavItem" :key="i" v-bind:class="{ 'active-item' : getMenuIsActive(item)}">
+        <div class="mobile-menu-items" @click="$router.push(item.path)">
+          <v-icon color="#191919" size="20">{{ item.icon }}</v-icon>
+          <div>{{ item.title }}</div>
+        </div>
+      </div>
+
+      <!-- <v-btn 
+        v-for="(item, i) in menuNavItem" :key="i"
+        v-bind:class="{ 'active-item' : getMenuIsActive(item)}"
+        @click="$router.push(item.path)"
+      >
+        <span>{{item.title}}</span>
+      </v-btn> -->
+    </v-navigation-drawer>
     <v-main>
       <router-view/>
     </v-main>
@@ -51,6 +79,7 @@ export default {
   data: () => {
     return {
       menuNavItem: menuItems,
+      drawer: false,
     }
   },
 
@@ -71,6 +100,7 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@800&family=Itim&display=swap');
+@import './scss//variables';
 
 .aplication {
   display: flex;
@@ -98,13 +128,43 @@ export default {
   display: flex;
   align-items: center;
   justify-content: end !important;
+  .menu-items {
+    display: flex;
+  }
   span {
     font-size: 14px;
+  }
+  @media screen {
+    @media (max-width: $mobile-screen) {
+      .menu-items {
+        display: none;
+      }
+    } 
   }
 }
 
 .active-item {
   border-bottom: solid whitesmoke 2px;
+  @media screen {
+    @media (max-width: $mobile-screen) {
+      background-color: #9802B8 ;
+      color: white;
+      i {
+        color: whitesmoke !important;
+      }
+    } 
+  }
+}
+
+.mobile-menu-items {
+  display: flex;
+  padding: 16px;
+  i {
+    margin-right: 8px;
+  }
+  &:hover {
+    background-color: rgb(224, 224, 224);
+  }
 }
 
 .text-footer {

@@ -47,7 +47,9 @@
               <v-icon color="white" class="ml-4" size="16">fa-solid fa-globe</v-icon>
               <div class="ml-2">Estabelecimentos</div>
             </div>
-            <ListPlaces v-for="(card , i) in allPlaces" :key="i" :title="card.title" :image="card.fileName" ></ListPlaces>
+            <div v-for="(card , i) in filteredArray" :key="i" @click="selectedMobile(i)">
+              <ListPlaces v-bind:class="{ 'selected-item' : selectedEntity.id === card.id }" :title="card.title" :image="card.fileName" @click="selectedMobile(i)"></ListPlaces>
+            </div>
           </div>
           <div v-else class="not-found"> 
             <div class="d-flex flex-column">
@@ -112,6 +114,7 @@
                   <div>{{ section.text }}</div>
                 </div>
               </v-expansion-panel-content>
+              <div class="divider-item"></div>
             </v-expansion-panel>
           </v-expansion-panels>
           </div>
@@ -144,7 +147,11 @@ export default {
   },
   computed: {
     selectedCard() {
+      if (this.filteredArray.length === 0) return null
+      const widthPage = window.innerWidth
+      if (widthPage <= 600) return this.selectedEntity || null
       const selectedPlace = this.showFiveItems[this.mainCard]
+
       return selectedPlace || null
     },
     totalPlaces() {
@@ -155,8 +162,15 @@ export default {
       const filteredBySearch = places.filter(x => x.title.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()))
       if (this.selectedCity !== '' && this.selectedCity) return filteredBySearch.filter(x => x.city === this.selectedCity)
       return filteredBySearch
-
     },
+
+    // listItems() {
+    //   const filteredBySearch = places.filter(x => x.title.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()))
+    //   if (this.selectedCity !== '' && this.selectedCity) return filteredBySearch.filter(x => x.city === this.selectedCity)
+
+    //   return filteredBySearch
+    // }
+    
     avaiblesCities() {
       if (this.filteredArray) return places.map(x => x.city)
       return this.filteredArray.map(x => x.city)
@@ -165,6 +179,7 @@ export default {
   watch: {
     searchTerm() {
       // const filterArray = places.filter(x => x.title.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()))
+      this.selectedEntity = this.filteredArray[0]
       this.startIndex = 0
       if (this.filteredArray.length === 0) this.showFiveItems = []
       this.showFiveItems = this.filteredArray.slice(0, 5)
@@ -175,6 +190,7 @@ export default {
       else this.mainCard = this.showFiveItems.length - 1
     },
     selectedCity() {
+      this.selectedEntity = this.filteredArray[0]
       this.startIndex = 0
       if (!this.selectedCity || this.selectedCity === '') return this.showFiveItems = this.filteredArray.slice(0, 5)
 
@@ -198,10 +214,12 @@ export default {
       startIndex: 0,
       mainCard: 2,
       startScroll: false,
+      selectedEntity: null,
     }
   },
   mounted() {
     this.showFiveItems = this.getFiveItems()
+    this.selectedEntity = places[0]
   },
 
   methods: {
@@ -243,6 +261,10 @@ export default {
     },
     openMapsUrl(url) {
       window.open(url, '_blank')
+    },
+    selectedMobile(index) {
+      const selectedEntity = this.filteredArray[index]
+      this.selectedEntity = selectedEntity || null
     }
   },
 }
@@ -348,6 +370,7 @@ export default {
         overflow-x: auto;
         max-height: 500px;
         padding-left: 0px;
+        padding-right: 0px;
         .cards-list {
           display: none !important;
         }
@@ -492,6 +515,57 @@ export default {
     font-size: 18px;
     font-weight: bold;
   }
+  @media screen {
+      @media (max-width: $mobile-screen) {
+        flex-direction: column;
+        padding: 0px;
+        margin-top: 20px;
+        .image-location-container ::v-deep {
+          // max-height: 100%;
+          .v-image__image {
+            border-radius: 0px;
+            // filter: blur(3px);
+          }
+        }
+        .section-infos {
+          margin: 0px !important;
+        }
+        .location-icon {
+          margin-left: 0px;
+          border-radius: 0px;
+        }
+        .overview-info {
+          border-radius: 0px;
+          color: whitesmoke;
+          margin-top: 0px;
+          border: none;
+          background-color: #191919;
+          .divider-item {
+            background-color: whitesmoke !important;
+          }
+        }
+        .overview-title {
+          color: whitesmoke !important;
+        }
+
+        .local-content {
+          margin-top: 12px;
+          margin-left: 0px;
+          .local-content-title {
+            border-radius: 0px;
+            font-size: 19px;
+            padding-left: 8px;
+          }
+        }
+        .section-infos ::v-deep {
+          .v-expansion-panel {
+            &::before {
+              box-shadow: none;
+            }
+          }
+        }
+      } 
+    }
 }
 
 .button-maps {
@@ -597,5 +671,11 @@ export default {
         display: flex;
       } 
     }
+}
+
+.selected-item {
+  background-color: #9802B8;
+  color: whitesmoke;
+  // border-top: solid 2px whitesmoke;
 }
 </style>
