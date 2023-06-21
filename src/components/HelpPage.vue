@@ -1,5 +1,5 @@
 <template>
-  <div class="container-wrapper d-flex">
+  <div class="container-wrapper container-content">
     <!-- <div> -->
       <div class="image-card">
         <div>
@@ -7,7 +7,7 @@
           <div>Nossa Equipe esta aqui para oque precisar</div>
         </div>
       </div>
-      <div style="width: 50%;">
+      <div class="image-about">
         <v-img
           lazy-src="../assets/womensgroup.jpeg"
           src="../assets/womensgroup.jpeg"
@@ -103,10 +103,31 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+@import '../scss/variables';
+
+.container-content {
+  display: flex;
+  @media screen {
+      @media (max-width: $mobile-screen) {
+        flex-direction: column;
+      }
+    }
+}
 
 .image-container {
   width: 100%;
   height: 100%;
+}
+.image-about {
+  width: 50%;
+  @media screen {
+      @media (max-width: $mobile-screen) {
+        width: 100%;
+        .v-image {
+          height: 400px !important;
+        }
+      }
+    }
 }
 .image-card {
   text-align: left;
@@ -122,6 +143,16 @@ export default {
   align-items: center;
   justify-content: center;
   color: whitesmoke;
+
+  @media screen {
+      @media (max-width: $mobile-screen) {
+        width: 100%;
+        font-size: 20px;
+        text-align: center;
+        padding: 12px;;
+        height: 400px;
+      }
+    }
 }
 .content-text {
   height: 100%;
@@ -143,6 +174,18 @@ export default {
     background-color: #191919;
     border-radius: 10px;
   }
+  @media screen {
+      @media (max-width: $mobile-screen) {
+
+        .v-image {
+          margin-top: 20px;
+        }
+        .form-card-box {
+          min-width: 100%;
+          border-radius: 0px;
+        }
+      }
+    }
 }
 
 .alert-about {

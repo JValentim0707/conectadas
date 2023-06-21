@@ -55,6 +55,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+@import '../scss/variables';
 .container-content{
  display: flex;
  widows: 100%;
@@ -80,6 +81,24 @@ export default {
  .content-image {
   width: 50%;
  }
+ @media screen {
+    @media (max-width: $mobile-screen) {
+      flex-direction: column;
+      .container-text {
+        width: 100%;
+        padding: 12px;
+        div {
+          font-size: 16px;
+          text-align: center;
+        }
+      }
+      .content-image {
+        width: 100%;
+      }
+      // justify-content: center !important;
+      // margin-top: 12px;
+    } 
+  }
 }
 .content-main {
 width: 100%;
@@ -117,6 +136,36 @@ justify-content: space-between;
     background-color: #AB3DC3;
     min-width: 350px;
     height: 800px;
+  }
+
+  @media screen {
+    @media (max-width: $mobile-screen) {
+      flex-direction: column;
+      .first-box {
+        min-width: auto;
+        height: 120px;
+        width: 100%;
+        div {
+          writing-mode: horizontal-tb;
+          transform: none;
+          font-size: 30px;;
+          // padding: 20px;
+        }
+      }
+      .box-content {
+        div {
+          width: 100%;
+          max-width: 100% !important;
+          font-size: 16px;
+          padding: 25px;
+          text-align: center;
+        }
+      }
+      .second-box {
+        min-width: auto;
+        height: 120px;
+      }
+    } 
   }
 }
 </style>
