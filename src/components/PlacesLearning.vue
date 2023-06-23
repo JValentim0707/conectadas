@@ -32,7 +32,9 @@
           <div class="cards-list" v-if="filteredArray.length > 0">
             <div v-for="(card , i) in showFiveItems" 
               :key="i" :title="card" 
-              v-bind:class="{ 'main-card' : getMainCard(i)}">
+              v-bind:class="{ 'main-card' : getMainCard(i)}"
+              @click="selectedCardOnClick(i)"
+              >
               <CardPlaces :image="card.fileName" :title="card.title"/>
             </div>
             <div @click="rightMove" class="right-arrow">
@@ -72,24 +74,24 @@
               <div class="overview-title">Visão Geral</div>
               <div class="divider-item"></div>
               <div class="overview-content">
-                <div class="d-flex">
+                <div class="d-flex" v-if="selectedCard.title && selectedCard.title !== ''">
                   <div class="overview-label">Nome</div>
                   <div class="overview-text">{{ selectedCard.title }}</div>
                 </div>
                 <div class="d-flex">
-                  <div class="overview-label">Cidade</div>
+                  <div class="overview-label" v-if="selectedCard.city && selectedCard.city !== ''">Cidade</div>
                   <div class="overview-text">{{selectedCard.city}}</div>
                 </div>
                 <div class="d-flex">
-                  <div class="overview-label">Telefone</div>
+                  <div class="overview-label" v-if="selectedCard.phone && selectedCard.phone !== ''">Telefone</div>
                   <div class="overview-text">{{selectedCard.phone}}</div>
                 </div>
                 <div class="d-flex">
-                  <div class="overview-label">Endereço</div>
+                  <div class="overview-label" v-if="selectedCard.address && selectedCard.address !== ''">Endereço</div>
                   <div class="overview-text">{{selectedCard.address}}</div>
                 </div>
                 <div class="d-flex">
-                  <div class="overview-label">CEP</div>
+                  <div class="overview-label" v-if="selectedCard.postcode && selectedCard.postcode !== ''">CEP</div>
                   <div class="overview-text">{{selectedCard.postcode}}</div>
                 </div>
               </div>
@@ -262,6 +264,9 @@ export default {
     openMapsUrl(url) {
       window.open(url, '_blank')
     },
+    selectedCardOnClick(index) {
+      this.mainCard = index
+    },
     selectedMobile(index) {
       const selectedEntity = this.filteredArray[index]
       this.selectedEntity = selectedEntity || null
@@ -323,7 +328,7 @@ export default {
 .divider-item {
   display: flex;
   width: 100%;
-  background-color: #191919;
+  background-color: #9802B8;
   height: 2px;
 }
 
@@ -337,7 +342,7 @@ export default {
   }
 
 .places-content {
-  background-color: #191919;
+  background-color: #2E0138;
   padding: 15px;
 
   display: flex;
@@ -393,7 +398,7 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     height: 300px;
-    border: solid 2px #191919;
+    border: solid 2px #9802B8;
     margin-top: 20px;
     border-radius: 10px;
     max-width: 500px;
@@ -445,7 +450,7 @@ export default {
       font-size: 22px;
       font-weight: bold;
       padding: 12px;
-      background-color: #191919;
+      background-color: #9802B8;
       height: 50px;
       color: whitesmoke;
       width: 100%;
@@ -491,7 +496,7 @@ export default {
   }
   .location-icon {
     margin-left: 10px;
-    border: solid 2px #191919;
+    border: solid 2px #9802B8;
     height: 50px;
     border-radius: 10px;
     width: 50px;

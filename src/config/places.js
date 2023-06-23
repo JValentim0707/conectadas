@@ -1,9 +1,9 @@
 const places = [
   {
     id: 1,
-    title: 'Burguer King',
-    fullTitle: 'Burguer King',
-    fileName: 'BurguerKing.jpeg',
+    title: 'Etec',
+    fullTitle: 'Escola Tecnica Estadual',
+    fileName: 'etec.jpeg',
     address: "R. José Camilo de Camargo, 5 - Lot. Remanso Campineiro, Hortolândia - SP",
     phone: "-",
     city: 'Hortolandia',

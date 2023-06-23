@@ -17,7 +17,7 @@
         <span>{{item.title}}</span>
       </v-btn>
     </div>
-    <div class="pr-2" @click="drawer = !drawer"><v-icon color="white">fa-solid fa-bars</v-icon></div>
+    <div class="menu-icon pr-2" @click="drawer = !drawer"><v-icon color="white">fa-solid fa-bars</v-icon></div>
     </v-bottom-navigation>
     <v-navigation-drawer
       v-model="drawer"
@@ -26,8 +26,8 @@
     >
       <div class="d-flex justify-center pa-5">
         <v-img
-        lazy-src="./assets/logoOriginal.png"
-        src="./assets/logoOriginal.png"
+        lazy-src="./assets/newLogo.png"
+        src="./assets/newLogo.png"
         max-width="100"
         ></v-img>
       </div>
@@ -169,5 +169,14 @@ export default {
 
 .text-footer {
   color: white;
+}
+
+.menu-icon {
+  display: none;
+  @media screen {
+    @media (max-width: $mobile-screen) {
+      display: flex;
+    } 
+  }
 }
 </style>

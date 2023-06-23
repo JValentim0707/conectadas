@@ -30,7 +30,7 @@
       </div>
       <div class="content-image">
         <v-img
-          lazy-src="../assets/womans-group.jpg"
+          lazy-src="../assets/coworking.jpg"
           src="../assets/coworking.jpg"
           max-width="100%"
           height="100%"

@@ -57,9 +57,10 @@ export default {
   .card-content {
     position: absolute;
     z-index: 2;
-    background-color: #f5f5f5;
+    background-color: #9802B8;
+    color: white;
     width: 99%;
-    height: 30px;
+    height: 100px;
     text-transform: uppercase;
     border-radius: 0px 0px 10px 10px;
 
@@ -72,21 +73,21 @@ export default {
       font-size: 15px;
       font-weight: bold;
       margin-left: 8px;
-      display: none;
+      // display: none;
     }
   }
 
-  &:hover {
-    .card-content {
-      transition: 0.8s;
-      height: 100px;
-      // background-color: red;
-      .description-card {
-        display: flex;
+  // &:hover {
+  //   .card-content {
+  //     transition: 0.8s;
+  //     height: 100px;
+  //     // background-color: red;
+  //     .description-card {
+  //       display: flex;
 
-      }
-    }
-  }
+  //     }
+  //   }
+  // }
 }
 
 </style>

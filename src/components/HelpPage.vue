@@ -19,9 +19,9 @@
     <div class="content-form">
       <div>
         <v-img
-        lazy-src="../assets/logoOriginal.png"
-        src="../assets/logoOriginal.png"
-        width="150"
+        lazy-src="../assets/newLogo.png"
+        src="../assets/newLogo.png"
+        width="200"
         ></v-img>
       </div>
       <div class="form-card-box">
