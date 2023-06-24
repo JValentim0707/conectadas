@@ -35,7 +35,7 @@
               v-bind:class="{ 'main-card' : getMainCard(i)}"
               @click="selectedCardOnClick(i)"
               >
-              <CardPlaces :image="card.fileName" :title="card.title"/>
+              <CardPlaces :image="card.fileName" :title="card.title" :description="card.description"/>
             </div>
             <div @click="rightMove" class="right-arrow">
               <v-icon color="white" size="26">fa-arrow-right</v-icon>
@@ -95,7 +95,7 @@
                   <div class="overview-text">{{selectedCard.postcode}}</div>
                 </div>
               </div>
-              <a class="d-flex justify-center mb-2" href=" https://www.vestibularfatec.com.br/home/ ">https://www.vestibularfatec.com.br/home/</a>
+              <a class="d-flex justify-center mb-2" v-if="selectedCard.website && selectedCard.website !== ''" href=" https://www.vestibularfatec.com.br/home/ ">{{ selectedCard.website }}</a>
             </div>
           </div>
           <div class="local-content" v-if="selectedCard">
@@ -104,7 +104,6 @@
               <div class="local-content-title">{{ selectedCard.fullTitle}}</div>
               <div class="location-icon" @click="openMapsUrl(selectedCard.url)" ><v-icon color="#ff5a4e">fa-solid fa-location-dot</v-icon></div>
             </div>
-
             <v-expansion-panels v-for="(section, i) in selectedCard.sections" :key="i" class="section-infos">
             <v-expansion-panel>
               <v-expansion-panel-header>
@@ -114,6 +113,84 @@
                 <div>
                   <div class="section-subtitle">{{ section.subtitle }}</div>
                   <div>{{ section.text }}</div>
+                </div>
+              </v-expansion-panel-content>
+              <div class="divider-item"></div>
+            </v-expansion-panel>
+          </v-expansion-panels>
+          <v-expansion-panels class="section-infos">
+            <v-expansion-panel>
+              <v-expansion-panel-header>
+                <div class="section-header">Outras Unidades</div>
+              </v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <v-simple-table height="400" v-if="units.length > 0">
+                  <template v-slot:default>
+                    <thead>
+                      <tr>
+                        <th class="text-left">
+                          Unidade
+                        </th>
+                        <th class="text-left">
+                          Cidade
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        v-for="item in units"
+                        :key="item"
+                      >
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.city }}</td>
+                      </tr>
+                    </tbody>
+                  </template>
+                </v-simple-table>
+                <div class="not-found not-found-list" v-else>
+                  <div class="d-flex flex-column">
+                    <v-icon color="#191919" size="40">fa-regular fa-face-frown</v-icon>
+                    <div>Desculpe nao conseguimos Encontrar informaçōes!</div>
+                  </div>
+                </div>
+                <!-- <div> -->
+                  <!-- <div class="section-subtitle">{{ section.subtitle }}</div>
+                  <div>{{ section.text }}</div>
+                </div> -->
+              </v-expansion-panel-content>
+              <div class="divider-item"></div>
+            </v-expansion-panel>
+          </v-expansion-panels>
+          <v-expansion-panels class="section-infos">
+            <v-expansion-panel>
+              <v-expansion-panel-header>
+                <div class="section-header">Cursos</div>
+              </v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <v-simple-table height="400" v-if="courses.length > 0">
+                  <template v-slot:default>
+                    <thead>
+                      <tr>
+                        <th class="text-left">
+                          Curso
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        v-for="item in courses"
+                        :key="item"
+                      >
+                        <td>{{ item }}</td>
+                      </tr>
+                    </tbody>
+                  </template>
+                </v-simple-table>
+                <div class="not-found not-found-list" v-else>
+                  <div class="d-flex flex-column">
+                    <v-icon color="#191919" size="40">fa-regular fa-face-frown</v-icon>
+                    <div>Desculpe nao conseguimos Encontrar informaçōes!</div>
+                  </div>
                 </div>
               </v-expansion-panel-content>
               <div class="divider-item"></div>
@@ -136,6 +213,9 @@
 import CardPlaces from './utility/CardPlaces.vue'
 import ListPlaces from './utility/ListPlaces.vue'
 import places from '../config/places'
+// import { fatecUnits } from '../config/fatec'
+
+// import { getPlaceInformation } from '../services/placeInfomation'
 
 
 export default {
@@ -153,7 +233,6 @@ export default {
       const widthPage = window.innerWidth
       if (widthPage <= 600) return this.selectedEntity || null
       const selectedPlace = this.showFiveItems[this.mainCard]
-
       return selectedPlace || null
     },
     totalPlaces() {
@@ -203,6 +282,10 @@ export default {
       else if (this.showFiveItems.length % 2 === 0) this.mainCard = this.showFiveItems.length / 2
 
       else this.mainCard = this.showFiveItems.length - 1
+    },
+    selectedCard() {
+      this.units = this.selectedCard.units || []
+      this.courses = this.selectedCard.courses || []
     }
   },
   data: () => {
@@ -212,6 +295,8 @@ export default {
       citySelected: null,
       cities: [],
       showFiveItems: [],
+      units: [],
+      courses: [],
       allPlaces: places,
       startIndex: 0,
       mainCard: 2,
@@ -219,9 +304,24 @@ export default {
       selectedEntity: null,
     }
   },
-  mounted() {
+  async mounted() {
     this.showFiveItems = this.getFiveItems()
     this.selectedEntity = places[0]
+
+    // const newArray = []
+
+    // fatecUnits.forEach(x => {
+    //   const formatName = x.split('-')
+    //   let object = {
+    //     name: formatName[1],
+    //     city: formatName[0]
+    //   }
+
+    //   newArray.push(object)
+    // })
+
+
+    // console.log('dale', newArray)
   },
 
   methods: {
@@ -271,6 +371,7 @@ export default {
       const selectedEntity = this.filteredArray[index]
       this.selectedEntity = selectedEntity || null
     }
+
   },
 }
 </script>
@@ -655,6 +756,14 @@ export default {
 .not-found-dark {
   div {
     color: #191919 !important;
+  }
+}
+.not-found-list {
+  height: 200px !important;
+  div {
+    color: #191919 !important;
+    font-size: 20px;
+    width: 300px;
   }
 }
 

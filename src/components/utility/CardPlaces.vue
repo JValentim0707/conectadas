@@ -9,7 +9,7 @@
         ></v-img>
         <div class="card-content">
         <div class="title-card">{{ title }}</div> 
-        <div class="description-card">ipsum dolor sit amet, consectetur iscing elit.</div> 
+        <div class="description-card">{{ description }}</div> 
         </div>
       <!-- </transition> -->
     </div>
@@ -22,7 +22,8 @@ export default {
   props: {
     // msg: String
     image: String,
-    title: String
+    title: String,
+    description: String
   },
   computed: {
     // imageSource () {
@@ -70,8 +71,7 @@ export default {
       margin-left: 8px;
     }
     .description-card {
-      font-size: 15px;
-      font-weight: bold;
+      font-size: 10px;
       margin-left: 8px;
       // display: none;
     }
