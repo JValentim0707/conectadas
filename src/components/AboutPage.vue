@@ -2,7 +2,7 @@
   <div class="container-wrapper">
     <div class="container-content">
       <div class="container-text">
-        <div>Bem Vindos a Conectadas, um poquinho sobre nos, ajudamos as mulheres ingressar na sua carreira Profissional</div>
+        <div>Bem Vindos a Conectadas, um pouquinho sobre nos, ajudamos as mulheres ingressar na sua carreira Profissional</div>
       </div>
       <div class="content-image">
         <v-img
@@ -17,7 +17,7 @@
       <div class="first-box"><div>Sobre Nós</div></div>
       <div class="box-content">
         <div>
-          O projeto conectadas foi realizado por alunos do técnico de administração da instituição Etec. Ele tem como objetivo ajudar as mulheres a serem inseridas no mercado de trabalho com mais conhecimentos técnicos e comportamentais,Afim de alavancar suas carreiras contando com o nosso auxílio.
+          O projeto conectadas foi realizado por alunos do técnico de administração da instituição Etec. Ele tem como objetivo ajudar as mulheres a serem inseridas no mercado de trabalho com mais conhecimentos técnicos e comportamentais. Afim de alavancar suas carreiras contando com o nosso auxílio.
           Aqui você encontra lugares propícios para aprimorar as suas habilidades através de cursos Eads e presenciais que podem ser realizados por qualquer pessoa.
           Queremos trazer informações para que assim você possa se sentir mais confiante no mercado de trabalho.
         </div>
@@ -26,7 +26,7 @@
     </div>
     <div class="container-content">
       <div class="container-text dark-purple">
-        <div> Nossa Equipe é feita por X pessoas dando o seu melhor pra entregar pra vocês mulheres uma melhor experiencia proffiocional</div>
+        <div> Nossa Equipe é feita por 6 pessoas dando o seu melhor pra entregar pra vocês mulheres uma melhor experiencia proficional.</div>
       </div>
       <div class="content-image">
         <v-img

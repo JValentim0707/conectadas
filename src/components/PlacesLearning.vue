@@ -94,8 +94,12 @@
                   <div class="overview-label" v-if="selectedCard.postcode && selectedCard.postcode !== ''">CEP</div>
                   <div class="overview-text">{{selectedCard.postcode}}</div>
                 </div>
+                <div class="d-flex">
+                  <div class="overview-label" v-if="selectedCard.format && selectedCard.format !== ''">Formato</div>
+                  <div class="overview-text">{{selectedCard.format}}</div>
+                </div>
               </div>
-              <a class="d-flex justify-center mb-2" v-if="selectedCard.website && selectedCard.website !== ''" href=" https://www.vestibularfatec.com.br/home/ ">{{ selectedCard.website }}</a>
+              <a class="d-flex justify-center mb-2" v-if="selectedCard.website && selectedCard.website !== ''" :href="selectedCard.website">{{ selectedCard.website }}</a>
             </div>
           </div>
           <div class="local-content" v-if="selectedCard">
@@ -333,33 +337,46 @@ export default {
       return itemRender
     },
     rightMove() {
-      if (this.mainCard === this.filteredArray.length - 1) return
-      if ((this.startIndex +  this.filteredArray.length - 1) > this.filteredArray.length - 1) {
-        if (this.mainCard === 4) return
-        return this.mainCard = this.mainCard + 1
-      }
-      if (this.mainCard < 2) return this.mainCard = this.mainCard + 1
-      // setTimeout(() => {
+      const lastItem = this.allPlaces[this.allPlaces.length - 1]
+
+      if (this.mainCard === 4) { 
+        if (this.showFiveItems.some(x => x.id === lastItem.id)) return
         this.startIndex = this.startIndex + 1
+        const itemRender = this.filteredArray.slice(this.startIndex, this.startIndex + 5)
+        this.showFiveItems = itemRender
+        return
+      }
+      this.mainCard = this.mainCard + 1
+
+      // this.startIndex = this.startIndex + 1
+      // if ((this.startIndex +  5) > this.filteredArray.length - 1) {
+      //   this.startIndex = this.startIndex + 1
+      //   return this.mainCard = this.mainCard + 1
+      // }
+      // if (this.mainCard < 2) return this.mainCard = this.mainCard + 1
+      //   this.startIndex = this.startIndex + 1
 
         const itemRender = this.filteredArray.slice(this.startIndex, this.startIndex + 5)
 
         this.showFiveItems = itemRender
-        this.startScroll = false
-      // }, 300);
     },
     lefttMove() {
-      if (this.startIndex === 0) {
-        if (this.mainCard === 0) return
-        return this.mainCard = this.mainCard - 1
-      }
-      if (this.mainCard > 2) return this.mainCard = this.mainCard - 1
+      const firstItem = this.allPlaces[0]
 
-      this.startIndex = this.startIndex - 1
+      if (this.mainCard === 0) {
+      if (this.showFiveItems.some(x => x.id === firstItem.id)) return
+        this.startIndex = this.startIndex - 1
+        const itemRender = this.filteredArray.slice(this.startIndex, this.startIndex + 5)
+        this.showFiveItems = itemRender
+        return
+      }
+      
+      this.mainCard = this.mainCard - 1
 
       const itemRender = this.filteredArray.slice(this.startIndex, this.startIndex + 5)
 
       this.showFiveItems = itemRender
+      return
     },
     openMapsUrl(url) {
       window.open(url, '_blank')
@@ -498,7 +515,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 300px;
+    height: auto;
     border: solid 2px #9802B8;
     margin-top: 20px;
     border-radius: 10px;

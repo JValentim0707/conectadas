@@ -24,7 +24,7 @@ const places = [
       },  
       {
         sectionTitle: 'Vestibular',
-        subtitle: 'Mas como funciona o vestibular da Fatec?',
+        subtitle: 'Como entrar?',
         text: `Para ingressar no curso técnico em qualquer escola da Etec o candidato deverá se escrever no site http://www.vestibulinhoetec.com.br essa seleção ocorre duas vezes no ano e consiste em uma prova com conhecimentos adquiridos em escola nível fundamental e médio.`
       }
     ],
@@ -89,95 +89,109 @@ const places = [
   },
   {
     id: 4,
-    title: 'Mc Donalds',
-    fullTitle: 'Mc Donalds',
-    fileName: 'mc-donalds.jpeg',
-    address: 'R. José Camilo de Camargo, 5 - Lot. Remanso Campineiro, Hortolândia - SP',
-    phone: '(16) 3116-1080',
-    city: 'Hortolandia',
+    title: 'CIEE',
+    fullTitle: 'CIEE Virtual Saber',
+    fileName: 'ciee.jpeg',
+    address: 'Rua Tabapuã, 540 São Paulo/SP',
+    description: 'O CIEE Saber Virtual é uma plataforma de cursos gratuitos que permite a realização totalmente em sua casa',
+    phone: '(11) 3003-2433',
+    format: 'Online',
+    postcode: '04533-001',
+    website: 'https://portal.ciee.org.br/',
+    city: 'São Paulo',
     sections: [
       {
         sectionTitle: 'Sobre',
         subtitle: 'Um pouquinho sobre nós',
-        text: `A fatec é uma instituição de ensino superior com especialização em cursos tecnológicos,a faculdade oferece mais de 60 curso de graduação presenciais. e o melhor ainda, é totalmente gratuito, que possibilita diversas  oportunidades no mercado de trabalho.
-        Vale lembrar que a fatec constituí em cursos tecnológicos que são graduações menores e que duram de dois a três anos e meio`
+        text: `O CIEE Saber Virtual é uma plataforma de cursos gratuitos que permite a realização totalmente em sua casa utilizando um computador conectado à internet.
+        Nesse portal, é possível realizar trilhas de conhecimento, são 80 cursos que são para preparação para o mundo do trabalho, informática, comunicação, português, matemática, contabilidade, empreendedorismo e a economia.`
       },
       {
-        sectionTitle: 'Vestibular',
-        subtitle: 'Mas como funciona o vestibular da Fatec?',
-        text: `O vestibular possui apenas uma etapa, a prova é dividida em duas partes sendo elas uma prova de múltipla escolha e uma redação com duração de 5 horas`
+        sectionTitle: 'Objetivo',
+        subtitle: 'Qual é nosso objetivo?',
+        text: `Objetivo é apresentar conceitos, dicas e estratégias para lidar com a comunicação e a matemática no trabalho, na universidade e no dia a dia por meio de estudos estruturados, atividades e assuntos relacionados ao cotidiano de modo fácil a manter suas habilidades atualizadas em seu campo de trabalho ou desenvolver novas habilidades que são exigidas no mercado de trabalho atual. Isso pode ser especialmente valioso em um ambiente onde a tecnologia e as habilidades de trabalho estão em constante evolução.`
       }
     ],
-    url: 'https://www.google.com/maps/dir//Mc+Donalds+-+R.+Jos%C3%A9+Camilo+de+Camargo,+5+-+Lot.+Remanso+Campineiro,+Hortol%C3%A2ndia+-+SP,+13184-494/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x94c8beaa9807eb6b:0x9bec13a33626ea60?sa=X&ved=2ahUKEwjCv7X_18P_AhX3rZUCHdVLC5oQ48ADegQIGBAJ'
+    url: 'https://www.google.com/maps/place/Rua+Tabapu%C3%A3,+540+-+Itaim+Bibi,+S%C3%A3o+Paulo+-+SP,+04533-001/@-23.582924,-46.6780236,17z/data=!3m1!4b1!4m6!3m5!1s0x94ce575ddcdfeca5:0x9a95a66e6bd92ce9!8m2!3d-23.582924!4d-46.6758349!16s%2Fg%2F11bw447lpl?entry=ttu'
   },
   {
     id: 5,
-    title: 'Subway',
-    fullTitle: 'Subway',
-    fileName: 'subway.jpeg',
-    address: 'R. José Camilo de Camargo, 05 - LOJA 312 - Remanso Campineiro, Hortolândia - SP',
-    phone: '(19) 3116-1137',
-    city: 'Hortolandia',
+    title: 'Fundação Bradesco',
+    fullTitle: 'Escola Virtual Fundação Bradesco',
+    description: 'A Escola Virtual da Fundação Bradesco é um portal de e-learning dedicado a oferecer cursos livres online',
+    fileName: 'bradesco.jpeg',
+    address: 'Av. Wellman Galvão de França Rangel, 2000 - Swiss Park, Campinas',
+    phone: ' (19) 3268-3465',
+    city: 'Campinas',
+    postcode: '13049-254',
+    format: 'Online',
+    website: 'https://www.ev.org.br/',
     sections: [
       {
         sectionTitle: 'Sobre',
         subtitle: 'Um pouquinho sobre nós',
-        text: `A fatec é uma instituição de ensino superior com especialização em cursos tecnológicos,a faculdade oferece mais de 60 curso de graduação presenciais. e o melhor ainda, é totalmente gratuito, que possibilita diversas  oportunidades no mercado de trabalho.
-        Vale lembrar que a fatec constituí em cursos tecnológicos que são graduações menores e que duram de dois a três anos e meio`
+        text: `A Escola Virtual da Fundação Bradesco é um portal de e-learning dedicado a oferecer cursos livres online, totalmente gratuitos, via Internet. Está disponível 24 horas por dia, sete dias por semana, o é objetivo de propiciar um ambiente virtual de aprendizagem, no qual o aluno é o principal agente e condutor de seu aprendizado.
+        Por ser cursos on-line, você pode acessá-los de qualquer lugar e em qualquer momento através de um dispositivo móvel ou computador ligado a internet, . Isso traz uma grande flexibilidade para estudar e poder ajustar seu horário de estudo de acordo com suas necessidades.`
       },
       {
-        sectionTitle: 'Vestibular',
-        subtitle: 'Mas como funciona o vestibular da Fatec?',
-        text: `O vestibular possui apenas uma etapa, a prova é dividida em duas partes sendo elas uma prova de múltipla escolha e uma redação com duração de 5 horas`
+        sectionTitle: 'Sobre Nossos Cursos',
+        subtitle: 'Muitas variedades pra vocês',
+        text: `A Escola Virtual Fundação Bradesco tem um catálogo de 81 cursos básicos gratuitos com carga horário no máximo 180hr e totalmente online em diversas áreas.`
       }
     ],
-    url: 'https://www.google.com/maps/dir//Subway+Shopping+Hortol%C3%A2ndia+-+R.+Jos%C3%A9+Camilo+de+Camargo,+05+-+LOJA+312+-+Remanso+Campineiro,+Hortol%C3%A2ndia+-+SP,+13184-494/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x94c8beaa8e500001:0x18d7f4489a7c7d2f?sa=X&ved=2ahUKEwjioMKI2MP_AhV7rJUCHTZqD5kQ48ADegQIGBAJ'
+    url: 'https://www.google.com/maps/place/Av.+Wellman+Galv%C3%A3o+de+Fran%C3%A7a+Rangel,+2000+-+Swiss+Park,+Campinas+-+SP,+13049-254/@-22.9677859,-47.0813369,17z/data=!3m1!4b1!4m6!3m5!1s0x94c8c967489fffe1:0x5b054f1e4d585830!8m2!3d-22.9677909!4d-47.078762!16s%2Fg%2F11s9qkrsqn?hl=pt-BR&entry=ttu',
   },
   {
     id: 6,
-    title: "Bob's",
-    fullTitle: "Bob's",
-    fileName: 'bobs.jpeg',
-    address: 'Av. José Paulino, 2600 - Jardim America, Paulínia - SP',
-    phone: '(19) 3244-9613',
-    city: 'Paulinia',
+    title: "Sebrae",
+    fullTitle: "Sebrae - Serviço Brasileiro de Apoio às Micro e Pequenas Empresas",
+    fileName: 'sebrae.jpeg',
+    description: 'O Sebrae abre caminhos para o interessado em empreender na intenção de abrir seu primeiro negócio',
+    website: 'https://sebrae.com.br/sites/PortalSebrae',
+    address: 'Rua Vergueiro, 1117 / Paraíso - São Paulo/SP',
+    phone: '0800 570 0800',
+    city: 'São Paulo',
+    postcode: '01504-001',
     sections: [
       {
         sectionTitle: 'Sobre',
         subtitle: 'Um pouquinho sobre nós',
-        text: `A fatec é uma instituição de ensino superior com especialização em cursos tecnológicos,a faculdade oferece mais de 60 curso de graduação presenciais. e o melhor ainda, é totalmente gratuito, que possibilita diversas  oportunidades no mercado de trabalho.
-        Vale lembrar que a fatec constituí em cursos tecnológicos que são graduações menores e que duram de dois a três anos e meio`
+        text: `O Sebrae abre caminhos para o interessado em empreender na intenção de abrir seu primeiro negócio até pequenas empresas que já estão consolidadas e buscam um novo posicionamento no mercado.
+        São mais de 150 cursos para garantir a sua qualificação para desenvolver pequenos negócios, o Sebrae atua em todo o território nacional.`
       },
       {
-        sectionTitle: 'Vestibular',
-        subtitle: 'Mas como funciona o vestibular da Fatec?',
-        text: `O vestibular possui apenas uma etapa, a prova é dividida em duas partes sendo elas uma prova de múltipla escolha e uma redação com duração de 5 horas`
+        sectionTitle: 'Localização',
+        subtitle: 'Onde podemos ser encontrado?',
+        text: `Onde tem Brasil, tem Sebrae, tem 27 Unidades da Federação, onde são oferecidas bolsas de estudo de cursos livres, capacitação, técnicos, graduações, pôs graduações, doutorado e mestrado, seminários, consultorias e assistência técnica para pequenos negócios de todos os setores.`
       }
     ],
-    url: "https://www.google.com/maps/dir//Bob's+Shakes+-+Av.+Jos%C3%A9+Paulino,+2600+-+Jardim+America,+Paul%C3%ADnia+-+SP,+13140-707/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x94c8bf3faa88f873:0x5268f5c8b3fbc086?sa=X&hl=pt-BR&ved=2ahUKEwjz176Y2MP_AhX9qZUCHU4oAMcQ48ADegQIEBAI"
+    url: 'https://www.google.com/maps/place/Rua+Vergueiro,+1117+-+Liberdade,+S%C3%A3o+Paulo+-+SP,+01504-001/@-23.5718864,-46.6417638,17z/data=!3m1!4b1!4m6!3m5!1s0x94ce5999af167f0f:0x3fc2a9e3f9b82567!8m2!3d-23.5718864!4d-46.6395751!16s%2Fg%2F11c4qjy47q?entry=ttu'
   },
   {
     id: 7,
-    title: 'Outback',
-    fullTitle: 'Outback',
-    fileName: 'outback.jpeg',
-    address: 'Av. Guilherme Campos, 500 - R 006 - Jardim Santa Genebra, Campinas - SP',
-    phone: '(19) 3756-9877',
+    title: 'Senac',
+    fullTitle: 'Senac - Serviço Nacional de Aprendizagem Comercia',
+    fileName: 'senac.jpeg',
+    description: 'Serviço Nacional de Aprendizagem Comercial – Senac é o principal agente de educação profissional voltado para o Comércio de Bens, Serviços e Turismo.',
+    address: 'Av. Marechal Tito, 1500 São Miguel Paulista, São Paulo - SP',
+    phone: '(11) 2504-8400',
     city: 'Campinas',
+    website: 'https://www.ead.senac.br/',
+    postcode: '08010-090',
     sections: [
       {
         sectionTitle: 'Sobre',
         subtitle: 'Um pouquinho sobre nós',
-        text: `A fatec é uma instituição de ensino superior com especialização em cursos tecnológicos,a faculdade oferece mais de 60 curso de graduação presenciais. e o melhor ainda, é totalmente gratuito, que possibilita diversas  oportunidades no mercado de trabalho.
-        Vale lembrar que a fatec constituí em cursos tecnológicos que são graduações menores e que duram de dois a três anos e meio`
+        text: `Serviço Nacional de Aprendizagem Comercial – Senac é o principal agente de educação profissional voltado para o Comércio de Bens, Serviços e Turismo.
+        Composta por mais de 600 unidades escolares, empresas pedagógicas e unidades móveis no brasil.`
       },
       {
-        sectionTitle: 'Vestibular',
-        subtitle: 'Mas como funciona o vestibular da Fatec?',
-        text: `O vestibular possui apenas uma etapa, a prova é dividida em duas partes sendo elas uma prova de múltipla escolha e uma redação com duração de 5 horas`
+        sectionTitle: 'Sobre Nossos Cursos',
+        subtitle: 'Oque podemos te oferecer?',
+        text: `Seu portfólio contempla bolsas de estudos presenciais e a distância, em diversas áreas do conhecimento, que vão da Formação Inicial e Continuada, técnicos, graduações e à Pós-graduação junto com possibilidades das empresas que contrata você e fornecer ao aluno planejar sua carreira profissional em uma perspectiva de educação continuada.`
       }
     ],
-    url: 'https://www.google.com/maps/dir//Outback+-+Av.+Guilherme+Campos,+500+-+R+006+-+Jardim+Santa+Genebra,+Campinas+-+SP,+13087-901/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x94c8c68483bf0eff:0x5e8dfca78ae91f2d?sa=X&ved=2ahUKEwj1yLSJzsP_AhXcHbkGHSLaCykQ48ADegQIGBAJ'
+    url: 'https://www.google.com/maps/place/Avenida+Marechal+Tito,+1500+-+S%C3%A3o+Miguel+Paulista,+S%C3%A3o+Paulo+-+SP/@-23.4956433,-46.4340227,17z/data=!3m1!4b1!4m6!3m5!1s0x94ce63dd09800149:0x4f436ed77615106c!8m2!3d-23.4956433!4d-46.431834!16s%2Fg%2F11gdc2cyfr?hl=pt-BR&entry=ttu'
   },
 ]
 

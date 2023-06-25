@@ -5,17 +5,17 @@ const menuItems = [
     icon: 'fa-solid fa-house'
   },
   {
-    title: 'Places',
+    title: 'Instituiçōes',
     path: '/locais',
     icon: 'fa-solid fa-map'
   },
   {
-    title: 'Help',
+    title: 'Ajuda',
     path: '/ajuda',
     icon: 'fa-regular fa-circle-question'
   },
   {
-    title: 'About',
+    title: 'Sobre',
     path: '/sobre',
     icon: 'fa-solid fa-book-open'
   }

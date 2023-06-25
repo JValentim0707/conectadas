@@ -4,7 +4,7 @@
       <div class="image-card">
         <div>
           <div>Esta Precisando de Ajuda ?</div>
-          <div>Nossa Equipe esta aqui para oque precisar</div>
+          <div>Nossa Equipe esta aqui para o que precisar!</div>
         </div>
       </div>
       <div class="image-about">
@@ -59,7 +59,7 @@
           <div class="alert-content">
             <v-icon color="white" size="80" class="mb-4">fa-regular fa-circle-check</v-icon>
             <div> Enviado com Sucesso</div>
-            <div> em Breve entraremos em contanto</div>
+            <div> em Breve entraremos em contato</div>
           </div>
         </div>
       </v-card>

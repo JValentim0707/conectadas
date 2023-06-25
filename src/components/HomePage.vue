@@ -74,7 +74,7 @@ export default {
     return {
       menuOptions: [
         {
-          text: 'Locais Capacitação',
+          text: 'Instituiçōes',
           path: '/locais'
         },
         {
