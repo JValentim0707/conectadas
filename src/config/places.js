@@ -1,6 +1,8 @@
 // Import Place Extra Information
 import { etecUnits, etecCourses } from '../config/etec'
 import { fatecUnits, fatecCourses } from '../config/fatec'
+import { senaiCourses, senaiUnits } from '../config/senai'
+import { cieeCourses } from './ciee'
 
 
 const places = [
@@ -83,8 +85,8 @@ const places = [
         Não ocorre acepção de pessoas, visto que todos são capazes de adquirir conhecimento e mostrar o seu potencial no mercado Tenha você 16 anos ou 60.`
       }
     ],
-    units: [],
-    courses: [],
+    units: senaiUnits,
+    courses: senaiCourses,
     url: 'https://www.google.com/maps/place/Av.+Paulista,+1313+-+Centro+Hist%C3%B3rico+de+S%C3%A3o+Paulo,+S%C3%A3o+Paulo+-+SP,+01311-200/@-23.5634986,-46.6570215,17z/data=!3m1!4b1!4m6!3m5!1s0x94ce59b8bef0c08d:0x1e5b40890eac320d!8m2!3d-23.5635035!4d-46.6544466!16s%2Fg%2F11j9cl_7wv?entry=ttu'
   },
   {
@@ -112,6 +114,8 @@ const places = [
         text: `Objetivo é apresentar conceitos, dicas e estratégias para lidar com a comunicação e a matemática no trabalho, na universidade e no dia a dia por meio de estudos estruturados, atividades e assuntos relacionados ao cotidiano de modo fácil a manter suas habilidades atualizadas em seu campo de trabalho ou desenvolver novas habilidades que são exigidas no mercado de trabalho atual. Isso pode ser especialmente valioso em um ambiente onde a tecnologia e as habilidades de trabalho estão em constante evolução.`
       }
     ],
+    courses: cieeCourses,
+    units: [],
     url: 'https://www.google.com/maps/place/Rua+Tabapu%C3%A3,+540+-+Itaim+Bibi,+S%C3%A3o+Paulo+-+SP,+04533-001/@-23.582924,-46.6780236,17z/data=!3m1!4b1!4m6!3m5!1s0x94ce575ddcdfeca5:0x9a95a66e6bd92ce9!8m2!3d-23.582924!4d-46.6758349!16s%2Fg%2F11bw447lpl?entry=ttu'
   },
   {

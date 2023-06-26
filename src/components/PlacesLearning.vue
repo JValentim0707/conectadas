@@ -122,7 +122,7 @@
               <div class="divider-item"></div>
             </v-expansion-panel>
           </v-expansion-panels>
-          <v-expansion-panels class="section-infos">
+          <v-expansion-panels class="section-infos" v-if="units.length > 0">
             <v-expansion-panel>
               <v-expansion-panel-header>
                 <div class="section-header">Outras Unidades</div>
@@ -135,7 +135,7 @@
                         <th class="text-left">
                           Unidade
                         </th>
-                        <th class="text-left">
+                        <th class="text-left" >
                           Cidade
                         </th>
                       </tr>
@@ -146,7 +146,7 @@
                         :key="item"
                       >
                         <td>{{ item.name }}</td>
-                        <td>{{ item.city }}</td>
+                        <td v-if="item.city">{{ item.city }}</td>
                       </tr>
                     </tbody>
                   </template>
@@ -165,7 +165,7 @@
               <div class="divider-item"></div>
             </v-expansion-panel>
           </v-expansion-panels>
-          <v-expansion-panels class="section-infos">
+          <v-expansion-panels class="section-infos"  v-if="courses.length > 0">
             <v-expansion-panel>
               <v-expansion-panel-header>
                 <div class="section-header">Cursos</div>
@@ -217,7 +217,7 @@
 import CardPlaces from './utility/CardPlaces.vue'
 import ListPlaces from './utility/ListPlaces.vue'
 import places from '../config/places'
-// import { fatecUnits } from '../config/fatec'
+import { senaiUnits } from '../config/senai'
 
 // import { getPlaceInformation } from '../services/placeInfomation'
 
@@ -312,20 +312,25 @@ export default {
     this.showFiveItems = this.getFiveItems()
     this.selectedEntity = places[0]
 
-    // const newArray = []
+    const newArray = []
 
-    // fatecUnits.forEach(x => {
-    //   const formatName = x.split('-')
-    //   let object = {
-    //     name: formatName[1],
-    //     city: formatName[0]
-    //   }
+    senaiUnits.forEach(x => {
+      const newCity = x.name.split('-')[0]
+      // if (x.includes('-')) console.log('dale dole')
+      // const newCity = x.split('-')
+      // console.log(newCity)
+      // const formatName = x.slice(0, 5)
+      // console.log(formatName)
+      let object = {
+        name: x.name,
+        city: newCity.slice(6)
+      }
 
-    //   newArray.push(object)
-    // })
+      newArray.push(object)
+    })
 
 
-    // console.log('dale', newArray)
+    console.log('dale', newArray)
   },
 
   methods: {
@@ -337,6 +342,9 @@ export default {
       return itemRender
     },
     rightMove() {
+      console.log('dale', this.selectedCard)
+      console.log('bacon', this.filteredArray)
+      if (this.selectedCard.id === this.filteredArray[this.filteredArray.length - 1].id) return
       const lastItem = this.allPlaces[this.allPlaces.length - 1]
 
       if (this.mainCard === 4) { 
@@ -361,6 +369,7 @@ export default {
         this.showFiveItems = itemRender
     },
     lefttMove() {
+      if (this.selectedCard.id === this.filteredArray[0].id) return
       const firstItem = this.allPlaces[0]
 
       if (this.mainCard === 0) {
