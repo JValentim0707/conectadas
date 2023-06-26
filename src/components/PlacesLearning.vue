@@ -4,7 +4,7 @@
       <div class="d-flex flex-column">
         <div class="header-location">
           <div class="title-page">Locais de Capacitação</div>
-          <div class="total-text">Locais Achados: {{ totalPlaces }}</div>
+          <div class="total-text">Locais Achados: {{ filteredArray.length }}</div>
         </div>
         <div class="search-container">
           <v-text-field
@@ -23,6 +23,12 @@
             dense
             outlined
           ></v-select>
+          <div class="clear-button">
+            <v-btn color="#9802B8" dark class="ml-3" heigth="40px" @click="clearFilters">
+              <v-icon color="white" size="14" class="mr-2">fa-solid fa-trash</v-icon>
+              <div>Limpar</div>
+            </v-btn>
+          </div>
         </div> 
         <div class="places-content">
           <div class="header-slidder">
@@ -200,6 +206,76 @@
               <div class="divider-item"></div>
             </v-expansion-panel>
           </v-expansion-panels>
+          <v-expansion-panels class="section-infos"  v-if="technicalCourses && technicalCourses.length > 0">
+            <v-expansion-panel>
+              <v-expansion-panel-header>
+                <div class="section-header">Cursos Tecnicos</div>
+              </v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <v-simple-table height="400" v-if="technicalCourses && technicalCourses.length > 0">
+                  <template v-slot:default>
+                    <thead>
+                      <tr>
+                        <th class="text-left">
+                          Curso
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        v-for="item in technicalCourses"
+                        :key="item"
+                      >
+                        <td>{{ item }}</td>
+                      </tr>
+                    </tbody>
+                  </template>
+                </v-simple-table>
+                <div class="not-found not-found-list" v-else>
+                  <div class="d-flex flex-column">
+                    <v-icon color="#191919" size="40">fa-regular fa-face-frown</v-icon>
+                    <div>Desculpe nao conseguimos Encontrar informaçōes!</div>
+                  </div>
+                </div>
+              </v-expansion-panel-content>
+              <div class="divider-item"></div>
+            </v-expansion-panel>
+          </v-expansion-panels>
+          <v-expansion-panels class="section-infos"  v-if="graduationCourses && graduationCourses.length > 0">
+            <v-expansion-panel>
+              <v-expansion-panel-header>
+                <div class="section-header">Graduaçōes</div>
+              </v-expansion-panel-header>
+              <v-expansion-panel-content>
+                <v-simple-table height="400" v-if="graduationCourses.length > 0">
+                  <template v-slot:default>
+                    <thead>
+                      <tr>
+                        <th class="text-left">
+                          Curso
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        v-for="item in graduationCourses"
+                        :key="item"
+                      >
+                        <td>{{ item }}</td>
+                      </tr>
+                    </tbody>
+                  </template>
+                </v-simple-table>
+                <div class="not-found not-found-list" v-else>
+                  <div class="d-flex flex-column">
+                    <v-icon color="#191919" size="40">fa-regular fa-face-frown</v-icon>
+                    <div>Desculpe nao conseguimos Encontrar informaçōes!</div>
+                  </div>
+                </div>
+              </v-expansion-panel-content>
+              <div class="divider-item"></div>
+            </v-expansion-panel>
+          </v-expansion-panels>
           </div>
           <div class="not-found not-found-dark" v-if="!selectedCard">
             <div class="d-flex flex-column">
@@ -239,22 +315,11 @@ export default {
       const selectedPlace = this.showFiveItems[this.mainCard]
       return selectedPlace || null
     },
-    totalPlaces() {
-      return places.filter(x => x.title.toLowerCase().includes(this.searchTerm.toLowerCase())).length
-      // return places.filter(x => x.title.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase())).length
-    },
     filteredArray() {
       const filteredBySearch = places.filter(x => x.title.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()))
       if (this.selectedCity !== '' && this.selectedCity) return filteredBySearch.filter(x => x.city === this.selectedCity)
       return filteredBySearch
     },
-
-    // listItems() {
-    //   const filteredBySearch = places.filter(x => x.title.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()))
-    //   if (this.selectedCity !== '' && this.selectedCity) return filteredBySearch.filter(x => x.city === this.selectedCity)
-
-    //   return filteredBySearch
-    // }
     
     avaiblesCities() {
       if (this.filteredArray) return places.map(x => x.city)
@@ -290,6 +355,8 @@ export default {
     selectedCard() {
       this.units = this.selectedCard.units || []
       this.courses = this.selectedCard.courses || []
+      this.technicalCourses = this.selectedCard.technicalCourses || []
+      this.graduationCourses = this.selectedCard.graduationCourses || []
     }
   },
   data: () => {
@@ -301,6 +368,8 @@ export default {
       showFiveItems: [],
       units: [],
       courses: [],
+      technicalCourses: [],
+      graduationCourses: [],
       allPlaces: places,
       startIndex: 0,
       mainCard: 2,
@@ -396,6 +465,10 @@ export default {
     selectedMobile(index) {
       const selectedEntity = this.filteredArray[index]
       this.selectedEntity = selectedEntity || null
+    },
+    clearFilters() {
+      this.searchTerm = ''
+      this.selectedCity = ''
     }
 
   },
@@ -817,5 +890,18 @@ export default {
   background-color: #9802B8;
   color: whitesmoke;
   // border-top: solid 2px whitesmoke;
+}
+.clear-button {
+  @media screen {
+    @media (max-width: $mobile-screen) { 
+      display: flex;
+      justify-content: end;
+      width: 100%;
+      padding: 18px;
+    }
+  }
+  .v-btn {
+    height: 40px !important;
+  }
 }
 </style>

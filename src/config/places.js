@@ -3,6 +3,10 @@ import { etecUnits, etecCourses } from '../config/etec'
 import { fatecUnits, fatecCourses } from '../config/fatec'
 import { senaiCourses, senaiUnits } from '../config/senai'
 import { cieeCourses } from './ciee'
+import { bradescoCourses } from './bradesco'
+import { technicaSenaclCourses, graduationSenacCourses } from './senac'
+import { sebraeCourses } from './sebrae'
+
 
 
 const places = [
@@ -143,6 +147,7 @@ const places = [
         text: `A Escola Virtual Fundação Bradesco tem um catálogo de 81 cursos básicos gratuitos com carga horário no máximo 180hr e totalmente online em diversas áreas.`
       }
     ],
+    courses: bradescoCourses,
     url: 'https://www.google.com/maps/place/Av.+Wellman+Galv%C3%A3o+de+Fran%C3%A7a+Rangel,+2000+-+Swiss+Park,+Campinas+-+SP,+13049-254/@-22.9677859,-47.0813369,17z/data=!3m1!4b1!4m6!3m5!1s0x94c8c967489fffe1:0x5b054f1e4d585830!8m2!3d-22.9677909!4d-47.078762!16s%2Fg%2F11s9qkrsqn?hl=pt-BR&entry=ttu',
   },
   {
@@ -169,6 +174,7 @@ const places = [
         text: `Onde tem Brasil, tem Sebrae, tem 27 Unidades da Federação, onde são oferecidas bolsas de estudo de cursos livres, capacitação, técnicos, graduações, pôs graduações, doutorado e mestrado, seminários, consultorias e assistência técnica para pequenos negócios de todos os setores.`
       }
     ],
+    courses: sebraeCourses,
     url: 'https://www.google.com/maps/place/Rua+Vergueiro,+1117+-+Liberdade,+S%C3%A3o+Paulo+-+SP,+01504-001/@-23.5718864,-46.6417638,17z/data=!3m1!4b1!4m6!3m5!1s0x94ce5999af167f0f:0x3fc2a9e3f9b82567!8m2!3d-23.5718864!4d-46.6395751!16s%2Fg%2F11c4qjy47q?entry=ttu'
   },
   {
@@ -195,6 +201,8 @@ const places = [
         text: `Seu portfólio contempla bolsas de estudos presenciais e a distância, em diversas áreas do conhecimento, que vão da Formação Inicial e Continuada, técnicos, graduações e à Pós-graduação junto com possibilidades das empresas que contrata você e fornecer ao aluno planejar sua carreira profissional em uma perspectiva de educação continuada.`
       }
     ],
+    technicalCourses: technicaSenaclCourses,
+    graduationCourses: graduationSenacCourses,
     url: 'https://www.google.com/maps/place/Avenida+Marechal+Tito,+1500+-+S%C3%A3o+Miguel+Paulista,+S%C3%A3o+Paulo+-+SP/@-23.4956433,-46.4340227,17z/data=!3m1!4b1!4m6!3m5!1s0x94ce63dd09800149:0x4f436ed77615106c!8m2!3d-23.4956433!4d-46.431834!16s%2Fg%2F11gdc2cyfr?hl=pt-BR&entry=ttu'
   },
 ]

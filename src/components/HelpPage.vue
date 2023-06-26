@@ -42,7 +42,7 @@
           outlined
           name="input-7-4"
           dark
-          label="Description"
+          label="Descrição"
           v-model="description"
           ></v-textarea>
         </div>

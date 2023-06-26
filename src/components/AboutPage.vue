@@ -26,7 +26,7 @@
     </div>
     <div class="container-content">
       <div class="container-text dark-purple">
-        <div> Nossa Equipe é feita por 6 pessoas dando o seu melhor pra entregar pra vocês mulheres uma melhor experiencia proficional.</div>
+        <div> Nossa Equipe é feita por 6 pessoas dando o seu melhor pra entregar pra vocês mulheres uma melhor experiência profissional.</div>
       </div>
       <div class="content-image">
         <v-img
